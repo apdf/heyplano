@@ -20,7 +20,7 @@ export async function POST(request: Request) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
-    // Add contact to Resend audience
+    // Add contact to Resend audience (non-blocking — don't fail the request if this errors)
     const { error: contactError } = await resend.contacts.create({
       email,
       audienceId: process.env.RESEND_AUDIENCE_ID,
@@ -28,7 +28,6 @@ export async function POST(request: Request) {
 
     if (contactError) {
       console.error("[waitlist] contacts.create failed:", contactError);
-      return Response.json({ error: "Failed to subscribe" }, { status: 500 });
     }
 
     // Send welcome email
@@ -45,7 +44,7 @@ export async function POST(request: Request) {
         ``,
         `7 things we learned the hard way about buying property in Spain is attached. Real process, real numbers, no agent spin. Read it before you sign anything.`,
         ``,
-        `Download it here: https://heyplano.com/heyplano-guide.pdf`,
+        `Download your free guide here: https://www.heyplano.com/heyplano_guide.pdf`,
         ``,
         `We're building the full product now — a step-by-step guide through the entire buying process, document review, mortgage comparison, and plain-language explanations of everything the industry would rather keep opaque. When it's ready, you'll be first in.`,
         ``,
