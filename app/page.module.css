@@ -271,6 +271,24 @@
   margin-bottom: 2rem;
 }
 
+.alreadyBought {
+  margin-top: 1.5rem;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.alreadyBoughtLink {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s;
+}
+
+.alreadyBoughtLink:hover {
+  color: var(--color-accent-hover);
+}
+
 /* --- Footer --- */
 
 .footer {

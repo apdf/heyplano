@@ -1,9 +1,5 @@
 import { Resend } from "resend";
 
-function getResend() {
-  return new Resend(process.env.RESEND_API_KEY);
-}
-
 export async function POST(request: Request) {
   const { email } = (await request.json()) as { email?: string };
 
@@ -11,39 +7,63 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid email" }, { status: 400 });
   }
 
+  if (!process.env.RESEND_API_KEY) {
+    console.error("[waitlist] RESEND_API_KEY is not set");
+    return Response.json({ error: "Server misconfigured" }, { status: 500 });
+  }
+
+  if (!process.env.RESEND_AUDIENCE_ID) {
+    console.error("[waitlist] RESEND_AUDIENCE_ID is not set");
+    return Response.json({ error: "Server misconfigured" }, { status: 500 });
+  }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   try {
     // Add contact to Resend audience
-    await getResend().contacts.create({
+    const { error: contactError } = await resend.contacts.create({
       email,
-      audienceId: process.env.RESEND_AUDIENCE_ID!,
+      audienceId: process.env.RESEND_AUDIENCE_ID,
     });
 
+    if (contactError) {
+      console.error("[waitlist] contacts.create failed:", contactError);
+      return Response.json({ error: "Failed to subscribe" }, { status: 500 });
+    }
+
     // Send welcome email
-    await getResend().emails.send({
+    const { error: emailError } = await resend.emails.send({
       from: "HeyPlano <hello@heyplano.com>",
       to: email,
-      subject: "You're on the HeyPlano waitlist",
+      subject: "Your guide is inside.",
       text: [
         `Hey,`,
         ``,
-        `You're in. Welcome to the HeyPlano waitlist.`,
+        `We went through the process of buying property in Spain ourselves. It was maddening. The kind of maddening where you realise, halfway through signing a 70-page mortgage contract, that nobody in the room is actually on your side.`,
         ``,
-        `We started building this because we went through the process of buying property in Spain ourselves — and honestly, it made us angry. The whole system is set up to benefit agents, lawyers, and middlemen. Nobody is on your side. Nobody tells you what you don't know. And by the time you figure it out, you've already signed something you shouldn't have.`,
+        `So we built HeyPlano. And we wrote you a guide.`,
         ``,
-        `HeyPlano is the independent advice we wish we'd had. No referral fees. No hidden agendas. Just clear, honest guidance from people who've been through it.`,
+        `7 things we learned the hard way about buying property in Spain is attached. Real process, real numbers, no agent spin. Read it before you sign anything.`,
         ``,
-        `We're building it right now. When we launch, you'll be the first to know.`,
+        `Download it here: https://heyplano.com/heyplano-guide.pdf`,
         ``,
-        `In the meantime — we're putting together a free guide: "7 things we learned the hard way about buying in Spain." We'll send it your way as soon as it's ready.`,
+        `We're building the full product now — a step-by-step guide through the entire buying process, document review, mortgage comparison, and plain-language explanations of everything the industry would rather keep opaque. When it's ready, you'll be first in.`,
+        ``,
+        `One ask: if you know someone starting to look at property in Spain, send them to heyplano.com. The more people who find this early, the better we can build it.`,
         ``,
         `Talk soon,`,
         `The HeyPlano team`,
       ].join("\n"),
     });
 
+    if (emailError) {
+      console.error("[waitlist] emails.send failed:", emailError);
+      return Response.json({ error: "Failed to send email" }, { status: 500 });
+    }
+
     return Response.json({ ok: true });
   } catch (err) {
-    console.error("Resend error:", err);
+    console.error("[waitlist] unexpected error:", err);
     return Response.json({ error: "Failed to subscribe" }, { status: 500 });
   }
 }

@@ -17,6 +17,9 @@ import {
   BUILDING_ITEMS,
   CTA_HEADLINE,
   CTA_SUBTEXT,
+  ALREADY_BOUGHT_TEXT,
+  ALREADY_BOUGHT_LINK_TEXT,
+  ALREADY_BOUGHT_HREF,
   FOOTER_COPY,
   FOOTER_EMAIL,
 } from "./content";
@@ -162,6 +165,12 @@ export default function Home() {
         <h2 className={s.sectionHeadline}>{CTA_HEADLINE}</h2>
         <p className={s.secondCtaSub}>{CTA_SUBTEXT}</p>
         <EmailForm id="cta" />
+        <p className={s.alreadyBought}>
+          {ALREADY_BOUGHT_TEXT}{" "}
+          <a href={ALREADY_BOUGHT_HREF} className={s.alreadyBoughtLink}>
+            {ALREADY_BOUGHT_LINK_TEXT}
+          </a>
+        </p>
       </section>
 
       {/* --- Footer --- */}
