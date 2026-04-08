@@ -28,12 +28,33 @@ import {
 function EmailForm({ id }: { id: string }) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!email) return;
-    console.log(`[HeyPlano waitlist] ${email}`);
-    setSubmitted(true);
+    if (!email || loading) return;
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Something went wrong");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (submitted) {
@@ -51,9 +72,10 @@ function EmailForm({ id }: { id: string }) {
         onChange={(e) => setEmail(e.target.value)}
         aria-label={`Email address (${id})`}
       />
-      <button type="submit" className={s.emailButton}>
-        {EMAIL_BUTTON}
+      <button type="submit" className={s.emailButton} disabled={loading}>
+        {loading ? "Joining…" : EMAIL_BUTTON}
       </button>
+      {error && <p className={s.formError}>{error}</p>}
     </form>
   );
 }

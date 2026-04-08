@@ -146,6 +146,18 @@
   background: var(--color-accent-hover);
 }
 
+.emailButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.formError {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #b91c1c;
+}
+
 .thankYou {
   font-family: var(--font-body);
   font-size: 15px;
