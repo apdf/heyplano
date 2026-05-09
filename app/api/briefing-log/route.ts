@@ -13,6 +13,7 @@ export async function POST(request: Request) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, ip, timestamp }),
+      redirect: "follow",
     });
   } catch (err) {
     console.error("[briefing-log] webhook failed:", err);
