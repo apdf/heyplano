@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Strategic Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F6F3EC;
+  --bg-soft: #EFEAD9;
+  --bg-card: #FBF9F2;
+  --ink: #15211B;
+  --ink-soft: #4A5651;
+  --ink-mute: #8B948E;
+  --deep: #1B3A2B;
+  --deep-soft: #2A4A3A;
+  --accent: #C75D33;
+  --accent-soft: rgba(199,93,51,0.10);
+  --sage: #7B9580;
+  --rule: rgba(21,33,27,0.14);
+  --rule-soft: rgba(21,33,27,0.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #E5E0D2;
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+body { padding: 48px 0; }
+
+.deck {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  align-items: center;
+}
+
+.slide {
+  width: 1123px;
+  height: 794px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  padding: 64px 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============ PRINT ============ */
+@page {
+  size: 1123px 794px;
+  margin: 0;
+}
+@media print {
+  html, body {
+    background: var(--bg) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 1123px;
+    height: 794px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .deck {
+    gap: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    align-items: stretch !important;
+  }
+  .slide {
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin: 0 !important;
+    box-shadow: none !important;
+    width: 1123px !important;
+    height: 794px !important;
+  }
+  .slide:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+  /* freeze rotating dots in print to prevent mid-rotation snapshots */
+  animateTransform { display: none; }
+}
+
+/* TYPE */
+.eyebrow {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+.page-num {
+  position: absolute;
+  top: 64px;
+  right: 80px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+
+.h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 58px;
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+}
+.h1 em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.lede {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.body {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.body strong { color: var(--ink); font-weight: 600; }
+.body em { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--ink); }
+
+.label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+
+/* FOOTER */
+.footer {
+  position: absolute;
+  bottom: 56px;
+  left: 80px;
+  right: 80px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.footer-left { display: inline-flex; align-items: center; gap: 14px; }
+.footer-left::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1.5px;
+  background: var(--accent);
+}
+
+/* ============ COVER ============ */
+.cover { display: grid; grid-template-rows: auto 1fr auto; }
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.cover-top .left { display: flex; align-items: center; gap: 12px; }
+.cover-top .left::before {
+  content: ''; display: block;
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.cover-top .right { text-align: left; line-height: 1.8; color: var(--ink-mute); }
+
+.cover-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 880px;
+  position: relative;
+  z-index: 2;
+}
+.cover-main .h1 { font-size: 76px; line-height: 1.0; letter-spacing: -0.025em; }
+.cover-sub {
+  margin-top: 36px;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 620px;
+}
+.cover-shape {
+  position: absolute;
+  right: -120px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 720px;
+  height: 720px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============ SLIDE 2 ============ */
+.s2-grid {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.story { border-left: 1.5px solid var(--accent); padding-left: 22px; }
+.story .quote-mark {
+  font-family: 'Fraunces', serif;
+  font-size: 40px;
+  line-height: 0.5;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: block;
+}
+.story p {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.story .meta {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  line-height: 1.5;
+}
+.facts { display: flex; flex-direction: column; gap: 22px; }
+.fact { display: grid; grid-template-columns: 56px 1fr; gap: 18px; }
+.fact .num {
+  font-family: 'Fraunces', serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.fact .body { font-size: 14px; line-height: 1.55; }
+.fact .body strong { display: block; margin-bottom: 4px; font-size: 15px; }
+
+/* ============ SLIDE 3 ============ */
+.s3-body {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.insight-text { display: flex; flex-direction: column; gap: 20px; }
+.insight-text .lede { font-size: 20px; }
+
+.role-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.role {
+  background: var(--bg);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 140px;
+}
+.role .role-tool {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.role .role-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.role .role-desc { font-size: 13px; line-height: 1.5; color: var(--ink-soft); }
+.role.empty { background: var(--accent-soft); }
+.role.empty .role-name { color: var(--accent); font-style: italic; font-family: 'Instrument Serif', serif; }
+.role.empty .role-tool { color: var(--accent); }
+
+/* ============ SLIDE 4 ============ */
+.s4-body {
+  margin-top: 44px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+}
+.s4-prose { display: flex; flex-direction: column; gap: 18px; }
+.s4-prose p:first-child {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.s4-prose p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+
+.stats { display: flex; flex-direction: column; }
+.stat {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+}
+.stat:last-child { border-bottom: 1px solid var(--rule); }
+.stat-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.stat-num .accent { color: var(--accent); margin: 0 2px; }
+.stat-num .unit {
+  font-size: 22px;
+  color: var(--ink-soft);
+  font-weight: 400;
+  margin-left: 6px;
+  letter-spacing: 0;
+}
+.stat-info strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.stat-info p {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+/* ============ SLIDE 5 ============ */
+.s5-body {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  flex: 1;
+}
+.s5-text { display: flex; flex-direction: column; gap: 22px; }
+.s5-text .lede { font-size: 22px; }
+.s5-text p { font-size: 15.5px; line-height: 1.65; color: var(--ink-soft); }
+
+.engine-hero {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============ SLIDE 6 ============ */
+.s6-diagram {
+  margin-top: 28px;
+}
+.s6-diagram svg { display: block; }
+.s6-explain {
+  margin-top: 36px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+}
+.layer-explain { display: flex; flex-direction: column; gap: 6px; }
+.layer-explain .layer-tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+.layer-explain .layer-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--ink);
+}
+.layer-explain .layer-desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ============ SLIDE 7 ============ */
+.s7-body {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
+  flex: 1;
+  align-items: center;
+}
+.s7-text { display: flex; flex-direction: column; gap: 18px; }
+.s7-text .lede { font-size: 20px; }
+.s7-text p { font-size: 15px; line-height: 1.65; color: var(--ink-soft); }
+
+.moat-tag {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 12px;
+  padding: 9px 16px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.moat-diagram { position: relative; width: 100%; height: 460px; }
+
+/* ============ SLIDE 8 ============ */
+.s8-intro {
+  margin-top: 24px;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 780px;
+}
+.streams {
+  margin-top: 36px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+.stream {
+  background: var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  border-top: 2px solid var(--accent);
+  padding: 26px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.stream-tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+}
+.stream-tag .num { color: var(--accent); }
+.stream h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.1;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.stream .payer {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--accent);
+  margin-top: -4px;
+}
+.stream .stream-body {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  flex: 1;
+}
+.stream .stream-rev {
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule-soft);
+}
+.stream .stream-rev-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.stream .stream-rev-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+/* ============ SLIDE 9 ============ */
+.s9-body { margin-top: 32px; }
+.s9-forces {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+}
+.force {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.force-num {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  font-weight: 500;
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+.force-content strong {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  display: block;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.force-content p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.s9-chart {
+  margin-top: 36px;
+  width: 100%;
+  height: 250px;
+  position: relative;
+}
+
+/* ============ SLIDE 10 ============ */
+.s10-intro {
+  margin-top: 24px;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 780px;
+}
+.archetypes {
+  margin-top: 36px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+.archetype {
+  background: var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.archetype .tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+.archetype h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.archetype .pain {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--accent);
+  padding-left: 12px;
+  margin: 4px 0;
+}
+.archetype p {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ============ SLIDE 11 ============ */
+.s11-body {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
+  flex: 1;
+}
+.founder-text { display: flex; flex-direction: column; gap: 22px; }
+.founder-text .lede { font-size: 21px; line-height: 1.45; }
+.founder-text p { font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
+
+.principles { display: flex; flex-direction: column; gap: 18px; }
+.principle {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule-soft);
+}
+.principle:first-child { border-top: none; padding-top: 0; }
+.principle .num {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  padding-top: 4px;
+}
+.principle h4 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: -0.005em;
+}
+.principle p { font-size: 13px; line-height: 1.55; color: var(--ink-soft); }
+
+/* ============ SLIDE 12 ============ */
+.close-h1 { margin-top: 36px; font-size: 56px; line-height: 1.1; }
+.close-grid {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+}
+.close-col { display: flex; flex-direction: column; gap: 12px; }
+.close-col .label { font-size: 10.5px; letter-spacing: 0.18em; }
+.close-col p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+.byline {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule-soft);
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+}
+.byline-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+.byline-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.byline-meta {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- SLIDE 1 — COVER -->
+  <section class="slide cover">
+    <div class="cover-top">
+      <div class="left">STRATEGIC BRIEF · CONFIDENTIAL</div>
+      <div class="right">
+        MAY 2026<br>
+        SENT TO A SMALL CIRCLE<br>
+        NOT FOR DISTRIBUTION
+      </div>
+    </div>
+
+    <svg class="cover-shape" viewBox="0 0 720 720" fill="none">
+      <circle cx="360" cy="360" r="358" stroke="rgba(199,93,51,0.10)" stroke-width="1"/>
+      <circle cx="360" cy="360" r="280" stroke="rgba(199,93,51,0.10)" stroke-width="1" stroke-dasharray="2 6"/>
+      <circle cx="360" cy="360" r="200" stroke="rgba(199,93,51,0.16)" stroke-width="1"/>
+      <circle cx="360" cy="360" r="120" stroke="rgba(199,93,51,0.20)" stroke-width="1" stroke-dasharray="2 4"/>
+      <circle cx="360" cy="360" r="6" fill="#C75D33"/>
+    </svg>
+
+    <div class="cover-main">
+      <h1 class="h1">The international<br>property buyer has<br><em>no advocate</em>.</h1>
+      <p class="cover-sub">We're building one. The engine behind it is more valuable than anyone in this market has noticed.</p>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">A WORKING HYPOTHESIS</div>
+      <div>01 / 12</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 — PROBLEM -->
+  <section class="slide">
+    <div class="eyebrow">THE BUYER'S PROBLEM</div>
+    <div class="page-num">02 / 12</div>
+
+    <h1 class="h1" style="margin-top: 28px; max-width: 920px;">A purchase that <em>should</em> be the best decision of their life,<br>made under conditions designed to confuse them.</h1>
+
+    <div class="s2-grid">
+      <div class="story">
+        <span class="quote-mark">"</span>
+        <p>A Norwegian family pays €2.1M for a villa above Marbella, primarily for the sea view. Their five intermediaries — agent, lawyer, mortgage broker, notary, surveyor — process the deal in three months.</p>
+        <p>Six months after closing, construction begins on an eight-story development directly in front of them. The urban planning permit was filed eighteen months earlier and sat publicly available at the local urbanism office. Nobody walked in.</p>
+        <p>The view they paid €600K extra for is now a wall.</p>
+        <div class="meta">A composite. Variations of this story repeat every month along this coast.</div>
+      </div>
+
+      <div class="facts">
+        <div class="fact">
+          <div class="num">01</div>
+          <div class="body"><strong>Buyer confusion is the business model.</strong>Every intermediary captures more value when the buyer understands less. That is not a flaw. It is the design.</div>
+        </div>
+        <div class="fact">
+          <div class="num">02</div>
+          <div class="body"><strong>The portals serve the seller, not her.</strong>Idealista and Fotocasa are listing databases optimised for inventory, not for the human deciding to move country.</div>
+        </div>
+        <div class="fact">
+          <div class="num">03</div>
+          <div class="body"><strong>Even her "advisors" earn elsewhere.</strong>Lawyers take referral fees. Buyer's agents split with brokers. There is no role in this market designed to be hers.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">THE BUYER IS ALONE.</div>
+      <div>THE SYSTEM LIKES IT THAT WAY.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 — INSIGHT -->
+  <section class="slide">
+    <div class="eyebrow">THE INSIGHT</div>
+    <div class="page-num">03 / 12</div>
+
+    <h1 class="h1" style="margin-top: 28px; max-width: 920px;">The buyer is the <em>only</em> party<br>not represented by software.</h1>
+
+    <div class="s3-body">
+      <div class="insight-text">
+        <p class="lede">Sellers have agents with CRMs. Developers have sales platforms. Banks have origination tech. Portals are listing databases.</p>
+        <p class="body">The buyer has a browser tab and a question.</p>
+        <p class="body">We close that gap. Not with another portal. With intelligence on her side, learning her, working for her, every day until she signs.</p>
+        <p class="body">The structural asymmetry is enormous. The fix is not a feature. It is a new role in the market.</p>
+      </div>
+
+      <div class="role-grid">
+        <div class="role">
+          <div class="role-tool">CRM</div>
+          <div class="role-name">Seller</div>
+          <div class="role-desc">Knows her listings, her leads, her pipeline.</div>
+        </div>
+        <div class="role">
+          <div class="role-tool">SALES STACK</div>
+          <div class="role-name">Developer</div>
+          <div class="role-desc">Reservation flow, payment plan, contract gen.</div>
+        </div>
+        <div class="role">
+          <div class="role-tool">ORIGINATION</div>
+          <div class="role-name">Bank</div>
+          <div class="role-desc">Underwriting, risk model, document automation.</div>
+        </div>
+        <div class="role empty">
+          <div class="role-tool">— NOTHING —</div>
+          <div class="role-name">Buyer</div>
+          <div class="role-desc">A browser tab. A spreadsheet. A list of questions she does not know to ask.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">STRUCTURAL ASYMMETRY.</div>
+      <div>OURS TO CORRECT.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 — OPPORTUNITY -->
+  <section class="slide">
+    <div class="eyebrow">THE OPPORTUNITY</div>
+    <div class="page-num">04 / 12</div>
+
+    <h1 class="h1" style="margin-top: 28px;">The flow is <em>large</em>,<br>growing, and underserved.</h1>
+
+    <div class="s4-body">
+      <div class="s4-prose">
+        <p>Cross-border residential purchasing is no longer a fringe of the market. It is one of the fastest-growing segments in European real estate, driven by remote work, climate migration, generational wealth transfer, and political flight from the United States.</p>
+        <p>Every transaction is high-value, high-margin, and structurally inefficient. A buyer who would never pay for advice in her home country pays a 5% kickback she cannot see, every time.</p>
+        <p>Spain is our entry market. The same engine works in Portugal, Italy, France, Greece, and beyond. Wherever a person buys property in a country they don't live in, the problem is the same.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">€600K<span class="accent">–</span>€1.5M</div>
+          <div class="stat-info">
+            <strong>Typical transaction</strong>
+            <p>In our target buyer segment.</p>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3<span class="accent">–</span>5%</div>
+          <div class="stat-info">
+            <strong>Broker commission on every deal</strong>
+            <p>The structural pool of value already moving sideways, paid by the developer or seller.</p>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">~50%</div>
+          <div class="stat-info">
+            <strong>Of that pool, captured by us</strong>
+            <p>For delivering a qualified buyer the agent could not reach themselves. Per closed deal, in cash, at handover.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">HIGH VALUE. LONG CYCLE. COMPOUNDING RELATIONSHIP.</div>
+      <div>THIS IS VENTURE-SCALE.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 — ENGINE CONCEPT -->
+  <section class="slide">
+    <div class="eyebrow">THE PRODUCT</div>
+    <div class="page-num">05 / 12</div>
+
+    <h1 class="h1" style="margin-top: 28px; max-width: 1000px;">The product is not a website.<br>It is an <em>engine</em> that learns each buyer.</h1>
+
+    <div class="s5-body">
+      <div class="s5-text">
+        <p class="lede">The buyer interacts through whichever surface suits her. Chat. Form. Voice. A document she uploads at midnight.</p>
+        <p>The engine captures everything. It compounds. It gets sharper every quarter, every conversation, every closed deal.</p>
+        <p>What you see on the page is incidental. The thing that matters lives underneath, and the thing underneath is what no one else is building.</p>
+      </div>
+
+      <div class="engine-hero">
+        <svg viewBox="0 0 480 460" width="100%" height="100%">
+          <circle cx="240" cy="230" r="200" fill="none" stroke="rgba(21,33,27,0.1)" stroke-width="1" stroke-dasharray="2 4"/>
+          <circle cx="240" cy="230" r="140" fill="none" stroke="rgba(21,33,27,0.18)" stroke-width="1"/>
+          <circle cx="240" cy="230" r="80" fill="none" stroke="rgba(199,93,51,0.4)" stroke-width="1.5"/>
+          <circle cx="240" cy="230" r="60" fill="#1B3A2B"/>
+          <text x="240" y="226" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" letter-spacing="2" fill="rgba(246,243,236,0.5)">REASONING</text>
+          <text x="240" y="248" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="20" fill="#F6F3EC">engine</text>
+
+          <!-- rotating data points around the engine -->
+          <g>
+            <animateTransform attributeName="transform" type="rotate" from="0 240 230" to="360 240 230" dur="90s" repeatCount="indefinite"/>
+            <circle cx="240" cy="150" r="3" fill="#C75D33"/>
+            <circle cx="320" cy="230" r="3" fill="#C75D33"/>
+            <circle cx="240" cy="310" r="3" fill="#C75D33"/>
+            <circle cx="160" cy="230" r="3" fill="#C75D33"/>
+          </g>
+
+          <text x="240" y="135" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.8" fill="#15211B" font-weight="500">BUYER · L1</text>
+          <text x="345" y="234" text-anchor="start" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.8" fill="#15211B" font-weight="500">WORLD · L2</text>
+          <text x="240" y="332" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.8" fill="#15211B" font-weight="500">OUTPUT</text>
+          <text x="135" y="234" text-anchor="end" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.8" fill="#15211B" font-weight="500">SURFACES</text>
+
+          <text x="240" y="85" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="14" fill="#4A5651">she shares more</text>
+          <text x="240" y="385" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="14" fill="#4A5651">she trusts us more</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">AN ENGINE, NOT AN INTERFACE.</div>
+      <div>EVERYTHING ELSE IS A SURFACE OVER IT.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6 — ARCHITECTURE -->
+  <section class="slide">
+    <div class="eyebrow">THE ARCHITECTURE</div>
+    <div class="page-num">06 / 12</div>
+
+    <h1 class="h1" style="margin-top: 28px;">Two layers of data.<br>One <em>reasoning</em> core.</h1>
+
+    <div class="s6-diagram">
+      <svg viewBox="0 0 960 280" width="100%" height="230" preserveAspectRatio="xMidYMid meet">
+        <rect x="40" y="40" width="220" height="200" fill="#FBF9F2" stroke="rgba(21,33,27,0.18)" stroke-width="1"/>
+        <text x="56" y="68" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.8" fill="#C75D33" font-weight="500">L1 · BUYER</text>
+        <text x="244" y="68" text-anchor="end" font-family="Geist Mono, monospace" font-size="9" letter-spacing="1.4" fill="#8B948E">UNIQUE</text>
+        <text x="56" y="106" font-family="Fraunces, serif" font-size="22" fill="#15211B">Her, in detail.</text>
+        <text x="56" y="138" font-family="Instrument Sans, sans-serif" font-size="13" fill="#4A5651">Life. Priorities.</text>
+        <text x="56" y="158" font-family="Instrument Sans, sans-serif" font-size="13" fill="#4A5651">Constraints. Hopes.</text>
+        <text x="56" y="178" font-family="Instrument Sans, sans-serif" font-size="13" fill="#4A5651">Things she would</text>
+        <text x="56" y="198" font-family="Instrument Sans, sans-serif" font-size="13" fill="#4A5651">never tell an agent.</text>
+        <line x1="56" y1="220" x2="244" y2="220" stroke="rgba(21,33,27,0.1)" stroke-width="1"/>
+        <text x="56" y="234" font-family="Geist Mono, monospace" font-size="9" letter-spacing="1.4" fill="#8B948E">DEPTH OVER TIME</text>
+
+        <line x1="260" y1="140" x2="370" y2="140" stroke="#C75D33" stroke-width="1.5"/>
+        <polygon points="370,140 364,136 364,144" fill="#C75D33"/>
+
+        <circle cx="480" cy="140" r="100" fill="none" stroke="rgba(199,93,51,0.3)" stroke-width="1" stroke-dasharray="2 4"/>
+        <circle cx="480" cy="140" r="68" fill="#1B3A2B"/>
+        <text x="480" y="134" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" letter-spacing="2" fill="rgba(246,243,236,0.55)">REASONING</text>
+        <text x="480" y="156" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="20" fill="#F6F3EC">engine</text>
+
+        <line x1="700" y1="140" x2="590" y2="140" stroke="#C75D33" stroke-width="1.5"/>
+        <polygon points="590,140 596,136 596,144" fill="#C75D33"/>
+
+        <rect x="700" y="40" width="220" height="200" fill="#FBF9F2" stroke="rgba(21,33,27,0.18)" stroke-width="1"/>
+        <text x="716" y="68" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.8" fill="#C75D33" font-weight="500">L2 · WORLD</text>
+        <text x="904" y="68" text-anchor="end" font-family="Geist Mono, monospace" font-size="9" letter-spacing="1.4" fill="#8B948E">PUBLIC</text>
+        <text x="716" y="106" font-family="Fraunces, serif" font-size="22" fill="#15211B">The place, in detail.</text>
+        <text x="716" y="138" font-family="Instrument Sans, sans-serif" font-size="13" fill="#4A5651">Walk-times. Light.</text>
+        <text x="716" y="158" font-family="Instrument Sans, sans-serif" font-size="13" fill="#4A5651">Schools. Regulation.</text>
+        <text x="716" y="178" font-family="Instrument Sans, sans-serif" font-size="13" fill="#4A5651">Noise. Gradients.</text>
+        <text x="716" y="198" font-family="Instrument Sans, sans-serif" font-size="13" fill="#4A5651">Micro-character.</text>
+        <line x1="716" y1="220" x2="904" y2="220" stroke="rgba(21,33,27,0.1)" stroke-width="1"/>
+        <text x="716" y="234" font-family="Geist Mono, monospace" font-size="9" letter-spacing="1.4" fill="#8B948E">STRUCTURED. ANYONE CAN SEE IT.</text>
+      </svg>
+    </div>
+
+    <div class="s6-explain">
+      <div class="layer-explain">
+        <div class="layer-tag">→ INSIGHT</div>
+        <div class="layer-name">She's surprised.</div>
+        <div class="layer-desc">The community vote on a fee increase. The neighbour's planning permit. Things no agent volunteers, no brochure shows.</div>
+      </div>
+      <div class="layer-explain">
+        <div class="layer-tag">→ MATCH</div>
+        <div class="layer-name">She finds it.</div>
+        <div class="layer-desc">Properties surfaced not because they fit the listing, but because they fit her actual life over the next ten years.</div>
+      </div>
+      <div class="layer-explain">
+        <div class="layer-tag">→ PROTECTION</div>
+        <div class="layer-name">She's safe.</div>
+        <div class="layer-desc">The clause her lawyer "summarised". The fee that doubles next year. The view that disappears. Flagged before the wire, not after.</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">L1 IS UNIQUE TO US. L2 IS PUBLIC.</div>
+      <div>THE COMBINATION IS OURS ALONE.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7 — MOAT -->
+  <section class="slide">
+    <div class="eyebrow">THE MOAT</div>
+    <div class="page-num">07 / 12</div>
+
+    <h1 class="h1" style="margin-top: 28px;">Every interaction makes the engine<br><em>harder to copy</em>.</h1>
+
+    <div class="s7-body">
+      <div class="s7-text">
+        <p class="lede">The buyer shares more because we deliver value first. Each new datapoint sharpens what we can offer her next.</p>
+        <p>A competitor with twice our capital cannot replicate this loop faster than time allows. The data accrues only through the relationship, and the relationship requires the trust we have built.</p>
+        <p>A second loop reinforces the first. Buyers who complete a purchase become local experts. Their post-transaction knowledge feeds the engine. Coverage deepens with every closed deal.</p>
+        <span class="moat-tag">Time is on our side</span>
+      </div>
+
+      <div class="moat-diagram">
+        <svg viewBox="0 0 460 460" width="100%" height="100%">
+          <!-- Top loop: closed red ellipse -->
+          <ellipse cx="230" cy="140" rx="125" ry="68" fill="none" stroke="#C75D33" stroke-width="2"/>
+          <!-- Top loop direction arrow at right side, pointing down (clockwise) -->
+          <polygon points="355,150 349,140 361,140" fill="#C75D33"/>
+
+          <!-- Bottom loop: closed sage ellipse -->
+          <ellipse cx="230" cy="320" rx="125" ry="68" fill="none" stroke="#7B9580" stroke-width="2"/>
+          <!-- Bottom loop direction arrow at right side, pointing down (clockwise) -->
+          <polygon points="355,330 349,320 361,320" fill="#7B9580"/>
+
+          <!-- Engine core in middle -->
+          <circle cx="230" cy="230" r="56" fill="#1B3A2B"/>
+          <text x="230" y="226" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" letter-spacing="1.6" fill="rgba(246,243,236,0.5)">THE</text>
+          <text x="230" y="246" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="16" fill="#F6F3EC">engine</text>
+
+          <!-- Top loop labels -->
+          <text x="230" y="42" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.8" fill="#C75D33" font-weight="500">LOOP 01 · BUYER LEARNING</text>
+          <text x="395" y="115" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="13" fill="#4A5651">value</text>
+          <text x="395" y="170" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="13" fill="#4A5651">data</text>
+          <text x="65" y="115" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="13" fill="#4A5651">trust</text>
+          <text x="65" y="170" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="13" fill="#4A5651">depth</text>
+
+          <!-- Bottom loop labels -->
+          <text x="230" y="424" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.8" fill="#7B9580" font-weight="500">LOOP 02 · LOCAL KNOWLEDGE</text>
+          <text x="395" y="295" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="13" fill="#4A5651">closed deal</text>
+          <text x="395" y="350" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="13" fill="#4A5651">expertise</text>
+          <text x="65" y="295" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="13" fill="#4A5651">coverage</text>
+          <text x="65" y="350" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="13" fill="#4A5651">precision</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">TWO LOOPS. ONE DIRECTION.</div>
+      <div>EACH TURN, THE MOAT DEEPENS.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8 — MONEY -->
+  <section class="slide">
+    <div class="eyebrow">HOW WE MAKE MONEY</div>
+    <div class="page-num">08 / 12</div>
+
+    <h1 class="h1" style="margin-top: 28px;">Three revenue streams,<br>one engine, <em>the buyer never pays</em>.</h1>
+
+    <p class="s8-intro">All three are paid by supply. None by the buyer. That asymmetry is what allows us to remain structurally on her side.</p>
+
+    <div class="streams">
+      <div class="stream">
+        <div class="stream-tag"><span class="num">01</span><span>HIGHEST MARGIN</span></div>
+        <h3>New construction</h3>
+        <div class="payer">paid by the developer</div>
+        <p class="stream-body">Developers must pre-sell roughly half a project before they can begin construction. They cannot reach foreign buyers themselves. We can. Each closed transaction is a single, large payment, paid against value already built into their model.</p>
+        <div class="stream-rev">
+          <div class="stream-rev-label">PER CLOSED DEAL</div>
+          <div class="stream-rev-num">€30K<span style="color:#C75D33;">–</span>€50K</div>
+        </div>
+      </div>
+
+      <div class="stream">
+        <div class="stream-tag"><span class="num">02</span><span>HIGHEST VOLUME</span></div>
+        <h3>Resale</h3>
+        <div class="payer">paid by the broker</div>
+        <p class="stream-body">When the buyer registers with us before contacting any broker, we hold the buyer-side commission claim under Spain's standing gentleman's-agreement convention. Mid-five-figures per transaction at scale. Predictable and recurring.</p>
+        <div class="stream-rev">
+          <div class="stream-rev-label">PER REGISTERED BUYER</div>
+          <div class="stream-rev-num">€5K<span style="color:#C75D33;">–</span>€15K</div>
+        </div>
+      </div>
+
+      <div class="stream">
+        <div class="stream-tag"><span class="num">03</span><span>FUTURE CEILING</span></div>
+        <h3>Aggregated understanding</h3>
+        <div class="payer">paid by the market</div>
+        <p class="stream-body">Anonymised buyer-side intent data. Where Northern Europeans are looking right now. What Americans want next year. Banks, developers, municipalities, insurers. This data does not currently exist for sale.</p>
+        <div class="stream-rev">
+          <div class="stream-rev-label">FUTURE UPSIDE</div>
+          <div class="stream-rev-num">unbounded</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">HIGH MARGIN FROM SUPPLY.</div>
+      <div>THE BUYER IS THE PRINCIPAL, NEVER THE PRODUCT.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9 — WHY NOW -->
+  <section class="slide">
+    <div class="eyebrow">WHY NOW</div>
+    <div class="page-num">09 / 12</div>
+
+    <h1 class="h1" style="margin-top: 28px;">We build for today.<br>We <em>compound</em> on tomorrow.</h1>
+
+    <div class="s9-body">
+      <div class="s9-forces">
+        <div class="force">
+          <div class="force-num">01</div>
+          <div class="force-content">
+            <strong>AI reasoning is finally enough.</strong>
+            <p>Modeling a single buyer's life across years was not possible three years ago. It is now. In two years it will be ordinary.</p>
+          </div>
+        </div>
+        <div class="force">
+          <div class="force-num">02</div>
+          <div class="force-content">
+            <strong>Cross-border buying is structurally rising.</strong>
+            <p>Remote work normalised. American political flight accelerated. European wealth transferred south. The buyer pool is growing, not stable.</p>
+          </div>
+        </div>
+        <div class="force">
+          <div class="force-num">03</div>
+          <div class="force-content">
+            <strong>The local agent does not compound.</strong>
+            <p>She runs on a phone, a paper file, and a desk in Marbella. She does not get sharper over time. The engine does. Every quarter, the gap widens.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="s9-chart">
+        <svg viewBox="0 0 1000 240" width="100%" height="100%" preserveAspectRatio="none">
+          <!-- baseline grid -->
+          <line x1="20" y1="200" x2="980" y2="200" stroke="rgba(21,33,27,0.12)" stroke-width="1"/>
+          <line x1="20" y1="200" x2="20" y2="20" stroke="rgba(21,33,27,0.12)" stroke-width="1"/>
+
+          <!-- year ticks -->
+          <line x1="20" y1="200" x2="20" y2="208" stroke="rgba(21,33,27,0.3)" stroke-width="1"/>
+          <line x1="340" y1="200" x2="340" y2="208" stroke="rgba(21,33,27,0.3)" stroke-width="1"/>
+          <line x1="660" y1="200" x2="660" y2="208" stroke="rgba(21,33,27,0.3)" stroke-width="1"/>
+          <line x1="980" y1="200" x2="980" y2="208" stroke="rgba(21,33,27,0.3)" stroke-width="1"/>
+
+          <!-- agent baseline -->
+          <line x1="20" y1="172" x2="980" y2="172" stroke="#7B9580" stroke-width="2"/>
+          <text x="980" y="186" text-anchor="end" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.4" fill="#7B9580" font-weight="500">LOCAL AGENT · FLAT</text>
+
+          <!-- gap area -->
+          <path d="M 660 100 L 660 172 L 980 172 L 980 6 Z" fill="rgba(199,93,51,0.07)"/>
+
+          <!-- engine curve: true exponential compound, rises from t=0, accelerates throughout -->
+          <path d="M 20 172 C 130 170 240 160 340 147 C 450 134 555 120 660 100 C 770 75 900 35 980 6" fill="none" stroke="#C75D33" stroke-width="2.5"/>
+          <text x="20" y="18" text-anchor="start" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.4" fill="#C75D33" font-weight="500">THE ENGINE · COMPOUNDS</text>
+
+          <!-- annotation -->
+          <text x="820" y="148" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="14" fill="#4A5651">the gap widens</text>
+
+          <!-- nodes -->
+          <circle cx="20" cy="172" r="5" fill="#C75D33"/>
+          <circle cx="340" cy="147" r="4" fill="#C75D33"/>
+          <circle cx="660" cy="100" r="4" fill="#C75D33"/>
+          <circle cx="980" cy="6" r="4" fill="#C75D33"/>
+
+          <text x="20" y="226" text-anchor="start" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.4" fill="#8B948E">TODAY</text>
+          <text x="340" y="226" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.4" fill="#8B948E">YEAR 1</text>
+          <text x="660" y="226" text-anchor="middle" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.4" fill="#8B948E">YEAR 2</text>
+          <text x="980" y="226" text-anchor="end" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.4" fill="#8B948E">YEAR 3+</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">EVERY STEP WIDENS THE GAP.</div>
+      <div>EVERY QUARTER, THE MOAT DEEPENS.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10 — ARCHETYPES -->
+  <section class="slide">
+    <div class="eyebrow">WHO WE SERVE</div>
+    <div class="page-num">10 / 12</div>
+
+    <h1 class="h1" style="margin-top: 28px;">Three archetypes,<br>all underserved, all <em>ready to listen</em>.</h1>
+
+    <p class="s10-intro">We do not segment by nationality or budget. We segment by what is breaking in their lives. Each archetype shares the same problem: a high-stakes purchase in a country whose machinery is hostile to outsiders.</p>
+
+    <div class="archetypes">
+      <div class="archetype">
+        <div class="tag">01 · NORTHERN EUROPE</div>
+        <h3>The Family in Transition</h3>
+        <div class="pain">"We need to know if our kids' school works before we love this house."</div>
+        <p>Dutch, German, Swedish, Belgian. €600K–€1.2M. Buying for lifestyle, family, partial relocation. Decision cycle is long. They want to be seen, not sold to.</p>
+      </div>
+
+      <div class="archetype">
+        <div class="tag">02 · UNITED STATES</div>
+        <h3>The American in Flight</h3>
+        <div class="pain">"We want a future our home country no longer offers."</div>
+        <p>Coastal liberals, dual-citizenship hopefuls, Latam-tied. €800K–€2.5M. Driven by political and cultural exit. New segment, fast-growing, underserved by every existing channel.</p>
+      </div>
+
+      <div class="archetype">
+        <div class="tag">03 · LIFESTYLE AT SCALE</div>
+        <h3>The Quiet Buyer</h3>
+        <div class="pain">"I do not want to talk to fifteen agents. I want one trustworthy answer."</div>
+        <p>European wealth, often older. €1.5M–€5M+. Has bought before and learned not to trust. Wants depth, not enthusiasm. Will not engage a sales channel. Will engage with someone structurally on her side.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">ARCHETYPES, NOT SEGMENTS.</div>
+      <div>WHAT BREAKS, NOT WHAT BANK.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11 — WHY US -->
+  <section class="slide">
+    <div class="eyebrow">WHY US</div>
+    <div class="page-num">11 / 12</div>
+
+    <h1 class="h1" style="margin-top: 28px;">A founder who <em>lived it</em>.<br>A build philosophy that keeps us lean.</h1>
+
+    <div class="s11-body">
+      <div class="founder-text">
+        <p class="lede">I bought property on Costa del Sol last year. Every problem in this brief is one I experienced personally. The frustration is documented. The thinking has been compounding.</p>
+        <p>AI agents do the work older versions of this idea would have needed teams for. Capital efficiency that did not exist two years ago. A small group of operators, a powerful engine, and a market that nobody else has the patience to serve properly.</p>
+        <p>Not raising yet. Looking for thinking partners, not capital.</p>
+      </div>
+
+      <div class="principles">
+        <div class="principle">
+          <div class="num">01</div>
+          <div>
+            <h4>Lived experience</h4>
+            <p>Personal purchase on Costa del Sol last year. Three years monitoring this market in close detail. The buyer's pain is not theoretical. It is documented, week by week.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="num">02</div>
+          <div>
+            <h4>AI-first build</h4>
+            <p>Agents handle ingestion, translation, follow-up, qualification. Minimal human capital. Capital efficiency older companies cannot match without rebuilding from scratch.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="num">03</div>
+          <div>
+            <h4>Lean capital strategy</h4>
+            <p>No appetite for raising too early. Build to value, then choose investors. Time is on our side. The engine compounds without burn.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <div class="num">04</div>
+          <div>
+            <h4>Room for partners</h4>
+            <p>Small by design. A few right people, with relationships into Spanish supply, can replace a large team.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">FOUNDER. PHILOSOPHY. TIMING.</div>
+      <div>EACH PIECE REINFORCES THE NEXT.</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 12 — CLOSE -->
+  <section class="slide">
+    <div class="eyebrow">A SMALL CIRCLE</div>
+    <div class="page-num">12 / 12</div>
+
+    <h1 class="h1 close-h1">Looking for<br>a few <em>thoughtful</em> partners.<br>Before naming it,<br>before raising,<br>before the moat closes.</h1>
+
+    <div class="close-grid">
+      <div class="close-col">
+        <div class="label">WHAT'S ON OFFER</div>
+        <p>Meaningful equity in a venture being built deliberately. Room for strategic counsel, capital, or operational depth.</p>
+      </div>
+      <div class="close-col">
+        <div class="label">WHAT TO BRING</div>
+        <p>Either lived real-estate experience, capital with patience, or a network into the buyers this venture aims to serve.</p>
+      </div>
+      <div class="close-col">
+        <div class="label">NEXT STEP</div>
+        <p>A conversation, not a pitch. Thinking partners over capital, for now.</p>
+      </div>
+    </div>
+
+    <div class="byline">
+      <div class="byline-label">PREPARED BY</div>
+      <div class="byline-name">Tommie Nordholm</div>
+      <div class="byline-meta">A Pretty Different Factory · tommie@apdf.se</div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">STRATEGIC BRIEF · CONFIDENTIAL · MAY 2026</div>
+      <div>END OF DOCUMENT.</div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
