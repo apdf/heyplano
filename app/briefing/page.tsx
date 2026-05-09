@@ -16,7 +16,7 @@ export default function BriefingLogin() {
     if (!email || !password || loading) return;
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Please enter a valid email address.");
+      setError("We don't recognise that email or password.");
       return;
     }
 
@@ -31,7 +31,7 @@ export default function BriefingLogin() {
       });
 
       if (res.status === 401) {
-        setError("Incorrect password.");
+        setError("We don't recognise that email or password.");
         setLoading(false);
         return;
       }
