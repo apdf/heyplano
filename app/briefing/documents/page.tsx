@@ -16,9 +16,8 @@ function ActiveDocument({ doc }: { doc: BriefingDocument }) {
     <div className={s.docCard}>
       <div className={s.docHeader}>
         <span className={s.typeBadge}>{TYPE_LABELS[doc.type]}</span>
-        <span className={s.docMeta}>
-          v{doc.version} · {doc.date}
-        </span>
+        <span className={s.versionBadge}>v{doc.version}</span>
+        <span className={s.docMeta}>{doc.date}</span>
       </div>
       <h2 className={s.docTitle}>{doc.title}</h2>
       <p className={s.docDescription}>{doc.description}</p>

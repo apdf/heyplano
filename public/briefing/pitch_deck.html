@@ -736,6 +736,56 @@ body { padding: 48px 0; }
   font-size: 13px;
   color: var(--ink-soft);
 }
+/* ============ SLIDE 5 (LANDSCAPE) ============ */
+.landscape-cards {
+  margin-top: 32px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+.landscape-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  padding: 22px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.landscape-card .lc-tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+}
+.landscape-card h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.2;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+}
+.landscape-card .lc-body {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  flex: 1;
+}
+.landscape-card .lc-missing {
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: 'Geist Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+
 </style>
 </head>
 <body>
@@ -746,7 +796,7 @@ body { padding: 48px 0; }
     <div class="cover-top">
       <div class="left">STRATEGIC BRIEF · CONFIDENTIAL</div>
       <div class="right">
-        MAY 2026<br>
+        9 MAY 2026 · V03<br>
         SENT TO A SMALL CIRCLE<br>
         NOT FOR DISTRIBUTION
       </div>
@@ -767,14 +817,14 @@ body { padding: 48px 0; }
 
     <div class="footer">
       <div class="footer-left">A WORKING HYPOTHESIS</div>
-      <div>01 / 12</div>
+      <div>01 / 13</div>
     </div>
   </section>
 
   <!-- SLIDE 2 — PROBLEM -->
   <section class="slide">
     <div class="eyebrow">THE BUYER'S PROBLEM</div>
-    <div class="page-num">02 / 12</div>
+    <div class="page-num">02 / 13</div>
 
     <h1 class="h1" style="margin-top: 28px; max-width: 920px;">A purchase that <em>should</em> be the best decision of their life,<br>made under conditions designed to confuse them.</h1>
 
@@ -798,7 +848,7 @@ body { padding: 48px 0; }
         </div>
         <div class="fact">
           <div class="num">03</div>
-          <div class="body"><strong>Even her "advisors" earn elsewhere.</strong>Lawyers take referral fees. Buyer's agents split with brokers. There is no role in this market designed to be hers.</div>
+          <div class="body"><strong>Even her "advisors" earn elsewhere.</strong>Lawyers take referral fees. Buyer's agents split with brokers. Six companies now claim to represent the buyer. None of their software learns her.</div>
         </div>
       </div>
     </div>
@@ -812,15 +862,15 @@ body { padding: 48px 0; }
   <!-- SLIDE 3 — INSIGHT -->
   <section class="slide">
     <div class="eyebrow">THE INSIGHT</div>
-    <div class="page-num">03 / 12</div>
+    <div class="page-num">03 / 13</div>
 
-    <h1 class="h1" style="margin-top: 28px; max-width: 920px;">The buyer is the <em>only</em> party<br>not represented by software.</h1>
+    <h1 class="h1" style="margin-top: 28px; max-width: 920px;">The buyer is the <em>only</em> party<br>whose software doesn't know her.</h1>
 
     <div class="s3-body">
       <div class="insight-text">
         <p class="lede">Sellers have agents with CRMs. Developers have sales platforms. Banks have origination tech. Portals are listing databases.</p>
-        <p class="body">The buyer has a browser tab and a question.</p>
-        <p class="body">We close that gap. Not with another portal. With intelligence on her side, learning her, working for her, every day until she signs.</p>
+        <p class="body">The buyer has a filter and a form that starts over every time.</p>
+        <p class="body">We close the depth gap. Not with another portal. With intelligence on her side, learning her, working for her, every day until she signs.</p>
         <p class="body">The structural asymmetry is enormous. The fix is not a feature. It is a new role in the market.</p>
       </div>
 
@@ -841,9 +891,9 @@ body { padding: 48px 0; }
           <div class="role-desc">Underwriting, risk model, document automation.</div>
         </div>
         <div class="role empty">
-          <div class="role-tool">— NOTHING —</div>
+          <div class="role-tool">A FILTER</div>
           <div class="role-name">Buyer</div>
-          <div class="role-desc">A browser tab. A spreadsheet. A list of questions she does not know to ask.</div>
+          <div class="role-desc">A filter. A form. A match that starts over.</div>
         </div>
       </div>
     </div>
@@ -857,7 +907,7 @@ body { padding: 48px 0; }
   <!-- SLIDE 4 — OPPORTUNITY -->
   <section class="slide">
     <div class="eyebrow">THE OPPORTUNITY</div>
-    <div class="page-num">04 / 12</div>
+    <div class="page-num">04 / 13</div>
 
     <h1 class="h1" style="margin-top: 28px;">The flow is <em>large</em>,<br>growing, and underserved.</h1>
 
@@ -899,10 +949,55 @@ body { padding: 48px 0; }
     </div>
   </section>
 
+  <!-- SLIDE 5 — LANDSCAPE -->
+  <section class="slide">
+    <div class="eyebrow">THE LANDSCAPE</div>
+    <div class="page-num">05 / 13</div>
+
+    <h1 class="h1" style="margin-top: 28px; max-width: 920px;">The market validates the need.<br><em>No one compounds</em>.</h1>
+
+    <p class="s8-intro" style="max-width: 620px;">Six funded companies now claim to represent the buyer. Each solves one piece. None assembles the engine.</p>
+
+    <div class="landscape-cards">
+      <div class="landscape-card">
+        <div class="lc-tag">AI-Assisted Search</div>
+        <h3>Idealista, Fotocasa, portals</h3>
+        <div class="lc-body">ChatGPT apps and conversational search layered on listing databases. No buyer graph. No cross-border intelligence. Still listing-centric.</div>
+        <div class="lc-missing">Missing: depth</div>
+      </div>
+
+      <div class="landscape-card">
+        <div class="lc-tag">Buyer-Agent Matching</div>
+        <h3>Directimo · €2M · Costa del Sol</h3>
+        <div class="lc-body">3,000 buyer journeys. 130+ micro-zones mapped. Agent network with AI overlay. Real traction, real work. But the data stays in CRM segmentation. It does not compound.</div>
+        <div class="lc-missing">Missing: memory</div>
+      </div>
+
+      <div class="landscape-card">
+        <div class="lc-tag">AI Investment Advisory</div>
+        <h3>PropHero · €16M · Spain HQ</h3>
+        <div class="lc-body">€35M revenue. EBITDA-positive. 250+ scoring variables. Serving international investors in Spain. Asks "what yields?" not "where should your family live?"</div>
+        <div class="lc-missing">Missing: the life question</div>
+      </div>
+
+      <div class="landscape-card">
+        <div class="lc-tag">Buyer Qualification</div>
+        <h3>Zefir / ZIA · €50M · Sequoia</h3>
+        <div class="lc-body">€600M annualised volume. 50,000 buyers/month. 4,500 partner agents. France only. Not cross-border. No life-situation reasoning.</div>
+        <div class="lc-missing">Missing: the border</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">EVERYONE BUILDS A PIECE.</div>
+      <div>NO ONE ASSEMBLES THE ENGINE.</div>
+    </div>
+  </section>
+
   <!-- SLIDE 5 — ENGINE CONCEPT -->
   <section class="slide">
     <div class="eyebrow">THE PRODUCT</div>
-    <div class="page-num">05 / 12</div>
+    <div class="page-num">06 / 13</div>
 
     <h1 class="h1" style="margin-top: 28px; max-width: 1000px;">The product is not a website.<br>It is an <em>engine</em> that learns each buyer.</h1>
 
@@ -951,7 +1046,7 @@ body { padding: 48px 0; }
   <!-- SLIDE 6 — ARCHITECTURE -->
   <section class="slide">
     <div class="eyebrow">THE ARCHITECTURE</div>
-    <div class="page-num">06 / 12</div>
+    <div class="page-num">07 / 13</div>
 
     <h1 class="h1" style="margin-top: 28px;">Two layers of data.<br>One <em>reasoning</em> core.</h1>
 
@@ -1019,7 +1114,7 @@ body { padding: 48px 0; }
   <!-- SLIDE 7 — MOAT -->
   <section class="slide">
     <div class="eyebrow">THE MOAT</div>
-    <div class="page-num">07 / 12</div>
+    <div class="page-num">08 / 13</div>
 
     <h1 class="h1" style="margin-top: 28px;">Every interaction makes the engine<br><em>harder to copy</em>.</h1>
 
@@ -1074,7 +1169,7 @@ body { padding: 48px 0; }
   <!-- SLIDE 8 — MONEY -->
   <section class="slide">
     <div class="eyebrow">HOW WE MAKE MONEY</div>
-    <div class="page-num">08 / 12</div>
+    <div class="page-num">09 / 13</div>
 
     <h1 class="h1" style="margin-top: 28px;">Three revenue streams,<br>one engine, <em>the buyer never pays</em>.</h1>
 
@@ -1124,12 +1219,12 @@ body { padding: 48px 0; }
   <!-- SLIDE 9 — WHY NOW -->
   <section class="slide">
     <div class="eyebrow">WHY NOW</div>
-    <div class="page-num">09 / 12</div>
+    <div class="page-num">10 / 13</div>
 
     <h1 class="h1" style="margin-top: 28px;">We build for today.<br>We <em>compound</em> on tomorrow.</h1>
 
     <div class="s9-body">
-      <div class="s9-forces">
+      <div class="s9-forces" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
         <div class="force">
           <div class="force-num">01</div>
           <div class="force-content">
@@ -1148,7 +1243,14 @@ body { padding: 48px 0; }
           <div class="force-num">03</div>
           <div class="force-content">
             <strong>The local agent does not compound.</strong>
-            <p>She runs on a phone, a paper file, and a desk in Marbella. She does not get sharper over time. The engine does. Every quarter, the gap widens.</p>
+            <p>She runs on a phone, a paper file, and a desk in Marbella. She does not get sharper over time. The engine does.</p>
+          </div>
+        </div>
+        <div class="force">
+          <div class="force-num">04</div>
+          <div class="force-content">
+            <strong>€130M+ deployed to solve fragments.</strong>
+            <p>Six companies have raised over €130M collectively in 24 months. The market is validated. The engine has not been built.</p>
           </div>
         </div>
       </div>
@@ -1169,8 +1271,8 @@ body { padding: 48px 0; }
           <line x1="20" y1="172" x2="980" y2="172" stroke="#7B9580" stroke-width="2"/>
           <text x="980" y="186" text-anchor="end" font-family="Geist Mono, monospace" font-size="10" letter-spacing="1.4" fill="#7B9580" font-weight="500">LOCAL AGENT · FLAT</text>
 
-          <!-- gap area -->
-          <path d="M 660 100 L 660 172 L 980 172 L 980 6 Z" fill="rgba(199,93,51,0.07)"/>
+          <!-- gap area — full width, between engine curve and agent baseline -->
+          <path d="M 20 172 C 130 170 240 160 340 147 C 450 134 555 120 660 100 C 770 75 900 35 980 6 L 980 172 Z" fill="rgba(199,93,51,0.07)"/>
 
           <!-- engine curve: true exponential compound, rises from t=0, accelerates throughout -->
           <path d="M 20 172 C 130 170 240 160 340 147 C 450 134 555 120 660 100 C 770 75 900 35 980 6" fill="none" stroke="#C75D33" stroke-width="2.5"/>
@@ -1202,7 +1304,7 @@ body { padding: 48px 0; }
   <!-- SLIDE 10 — ARCHETYPES -->
   <section class="slide">
     <div class="eyebrow">WHO WE SERVE</div>
-    <div class="page-num">10 / 12</div>
+    <div class="page-num">11 / 13</div>
 
     <h1 class="h1" style="margin-top: 28px;">Three archetypes,<br>all underserved, all <em>ready to listen</em>.</h1>
 
@@ -1240,7 +1342,7 @@ body { padding: 48px 0; }
   <!-- SLIDE 11 — WHY US -->
   <section class="slide">
     <div class="eyebrow">WHY US</div>
-    <div class="page-num">11 / 12</div>
+    <div class="page-num">12 / 13</div>
 
     <h1 class="h1" style="margin-top: 28px;">A founder who <em>lived it</em>.<br>A build philosophy that keeps us lean.</h1>
 
@@ -1292,7 +1394,7 @@ body { padding: 48px 0; }
   <!-- SLIDE 12 — CLOSE -->
   <section class="slide">
     <div class="eyebrow">A SMALL CIRCLE</div>
-    <div class="page-num">12 / 12</div>
+    <div class="page-num">13 / 13</div>
 
     <h1 class="h1 close-h1">Looking for<br>a few <em>thoughtful</em> partners.<br>Before naming it,<br>before raising,<br>before the moat closes.</h1>
 

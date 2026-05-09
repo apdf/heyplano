@@ -14,12 +14,12 @@ export interface BriefingDocument {
 export const briefingDocuments: BriefingDocument[] = [
   {
     title: "Strategic Brief",
-    version: "1.0",
-    date: "May 2026",
+    version: "0.3",
+    date: "9 May 2026",
     type: "deck",
     status: "active",
     description:
-      "The founding hypothesis, product architecture, moat, and revenue model — 12 slides. Sent to a small circle. Not for distribution.",
+      "The founding hypothesis, product architecture, moat, and revenue model — 13 slides. Sent to a small circle. Not for distribution.",
     filename: "pitch_deck.html",
   },
 ];
